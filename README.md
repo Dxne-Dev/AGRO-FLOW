@@ -1,45 +1,40 @@
-# AGRO-FLOW
+# AgroFlow
 
-AGRO-FLOW est un projet de gestion agricole orienté vers l’optimisation des opérations de terrain, la surveillance des cultures et la prise de décision basée sur les données.
+Mutualiser les volumes. Organiser les flux. Suivre les lots.
 
-## Objectif du projet
+SPA de démo (hackathon Cursor × Devs Days 2026) : regroupement de petits lots agricoles et passeport numérique par QR. **Pas de backend** — état dans `localStorage`.
 
-Le but principal est de centraliser les informations liées :
+## Source de vérité
 
-- aux parcelles et cultures,
-- à l’irrigation et aux besoins en eau,
-- au suivi des interventions agronomiques,
-- à la productivité et aux performances globales.
+Le contrat produit et technique est **[AgroFlow_SPEC.md](./AgroFlow_SPEC.md)** (v1.2).  
+Ce README ne fait que pointer vers la spec : en cas d’écart, la spec gagne.
 
-## Vision
-
-AGRO-FLOW vise à fournir un socle technique pour une meilleure traçabilité, une meilleure planification et une meilleure analyse des activités agricoles.
-
-## Structure du dépôt
-
-Le dépôt contient actuellement une base de documentation et plusieurs documents de référence du projet.
-
-- `README.md` : présentation du projet et mise en route,
-- `AgroFlow_Document_collaboratif_Hackathon_2026.docx` : document collaboratif du hackathon,
-- `AgroFlow_Planning_36h_et_Prompts_Cursor.pdf` : planification du projet et prompts d’assistance,
-- `AgroFlow_UX.docx` : éléments UX et vision produit,
-- `src/` : code source du projet,
-- `docs/` : documentation technique et fonctionnelle.
+Hors périmètre (entre autres) : auth, API distante, parcelles, irrigation, optimisation d’itinéraires.
 
 ## Démarrage
 
-1. Cloner le dépôt.
-2. Ouvrir le projet dans votre environnement de développement.
-3. Installer les dépendances nécessaires selon la stack technique retenue.
-4. Démarrer l’application ou le service associé.
+```bash
+npm install
+npm run dev
+```
 
-## Prochaines étapes
+Autres commandes : `npx tsc --noEmit`, `npm test`, `npm run lint`, `npm run build`, `npm run preview`.
 
-- définir l’architecture technique,
-- mettre en place les modules de gestion des cultures,
-- ajouter les fonctionnalités de suivi terrain,
-- intégrer les outils d’analyse et de reporting.
+## Parcours démo
 
-## État actuel
+Création de lot → matching → regroupement → opération → alerte retard → passeport (`/passport/AF-001`).
 
-Ce README constitue le premier jalon du projet et marque le démarrage du dépôt AGRO-FLOW.
+Détail figé, seed 955 kg, scores attendus : **spec §16 et §11.5**.
+
+## Modules
+
+`lots` → `matching` → `grouping` → `operations` → `alerts` → `dashboard` ∥ `passport`
+
+## Documents du dépôt
+
+| Fichier | Rôle |
+|---|---|
+| `AgroFlow_SPEC.md` | Spec (contrat) |
+| `AgroFlow_UX.docx` | Notes UX — subordonnées à la spec |
+| `AgroFlow_Planning_36h_et_Prompts_Cursor.pdf` | Planning historique — le planning vivant est spec §17 |
+| `AgroFlow_Document_collaboratif_Hackathon_2026.docx` | Notes d’équipe |

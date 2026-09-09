@@ -1,0 +1,30 @@
+[
+  {
+    "id": "EV-001",
+    "lotId": "AF-010",
+    "type": "note",
+    "message": "Récolte du matin conditionnée en cagettes ventilées.",
+    "offsetHours": -48
+  },
+  {
+    "id": "EV-002",
+    "lotId": "AF-010",
+    "type": "changement_statut",
+    "message": "Lot planifié pour un départ local vers Abomey-Calavi.",
+    "offsetHours": -24
+  },
+  {
+    "id": "EV-003",
+    "lotId": "AF-011",
+    "type": "note",
+    "message": "Chargement interdit en hauteur — palette unique.",
+    "offsetHours": -36
+  },
+  {
+    "id": "EV-004",
+    "lotId": "AF-011",
+    "type": "changement_statut",
+    "message": "Enregistrement opérateur : lot prêt au quai Porto-Novo.",
+    "offsetHours": -12
+  }
+]
