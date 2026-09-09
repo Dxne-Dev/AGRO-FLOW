@@ -17,9 +17,12 @@ AGRO-FLOW vise à fournir un socle technique pour une meilleure traçabilité, u
 
 ## Structure du dépôt
 
-Le dépôt est actuellement initialisé avec une base de documentation pour accueillir le développement du projet.
+Le dépôt contient actuellement une base de documentation et plusieurs documents de référence du projet.
 
 - `README.md` : présentation du projet et mise en route,
+- `AgroFlow_Document_collaboratif_Hackathon_2026.docx` : document collaboratif du hackathon,
+- `AgroFlow_Planning_36h_et_Prompts_Cursor.pdf` : planification du projet et prompts d’assistance,
+- `AgroFlow_UX.docx` : éléments UX et vision produit,
 - `src/` : code source du projet,
 - `docs/` : documentation technique et fonctionnelle.
 
