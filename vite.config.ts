@@ -7,5 +7,7 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   test: {
     environment: 'jsdom',
+    pool: 'threads',
+    fileParallelism: false,
   },
 })

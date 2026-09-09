@@ -9,7 +9,8 @@ SPA de démo (hackathon Cursor × Devs Days 2026) : regroupement de petits lots 
 Le contrat produit et technique est **[AgroFlow_SPEC.md](./AgroFlow_SPEC.md)** (v1.2).  
 Ce README ne fait que pointer vers la spec : en cas d’écart, la spec gagne.
 
-Hors périmètre (entre autres) : auth, API distante, parcelles, irrigation, optimisation d’itinéraires.
+Hors périmètre (entre autres) : API distante, parcelles, irrigation, optimisation d’itinéraires.  
+Auth = **session locale** (rôles + comptes) — identifiants seed : [`SEED_ACCOUNTS.md`](./SEED_ACCOUNTS.md).
 
 ## Démarrage
 
@@ -18,13 +19,9 @@ npm install
 npm run dev
 ```
 
-Autres commandes : `npx tsc --noEmit`, `npm test`, `npm run lint`, `npm run build`, `npm run preview`.
-
-## Parcours démo
-
-Création de lot → matching → regroupement → opération → alerte retard → passeport (`/passport/AF-001`).
-
-Détail figé, seed 955 kg, scores attendus : **spec §16 et §11.5**.
+1. Ouvrir `/login` → choisir un rôle  
+2. `/auth` → Connexion ou Créer un compte  
+3. Dashboard **vide** ; Profil → « Charger le scénario démo » pour AF-001…
 
 ## Modules
 

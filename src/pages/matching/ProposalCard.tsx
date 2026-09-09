@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Surface } from '../../components/Surface';
+import { useAuth } from '../../auth/AuthContext';
+import { canAccess } from '../../auth/types';
 import { groupingCriteria } from '../../services/grouping';
 import { scoreBadgeLabel } from '../../services/compatibility';
 import { formatKg } from '../../utils/formatKg';
@@ -27,11 +29,13 @@ export function ProposalCard({
   lots: Lot[];
   score: number;
 }) {
+  const { session } = useAuth();
   const partners = lots.filter((lot) => lot.id !== referenceId);
   const volume = lots.reduce((sum, lot) => sum + lot.quantiteKg, 0);
   const criteria = groupingCriteria(lots);
   const level = scoreBadgeLabel(score);
   const href = `/grouping?lots=${lots.map((lot) => lot.id).join(',')}`;
+  const canGroup = session ? canAccess(session.role, '/grouping') : false;
 
   return (
     <Surface>
@@ -71,12 +75,18 @@ export function ProposalCard({
         })}
       </ul>
 
-      <Link
-        to={href}
-        className="mt-5 flex h-12 items-center justify-center rounded-2xl bg-af-green text-sm font-bold tracking-wide text-white uppercase hover:bg-af-green-dark"
-      >
-        Voir le regroupement
-      </Link>
+      {canGroup ? (
+        <Link
+          to={href}
+          className="mt-5 flex h-12 items-center justify-center rounded-2xl bg-af-green text-sm font-bold tracking-wide text-white uppercase hover:bg-af-green-dark"
+        >
+          Voir le regroupement
+        </Link>
+      ) : (
+        <p className="mt-5 text-center text-[13px] text-af-muted">
+          Un opérateur logistique valide le regroupement.
+        </p>
+      )}
     </Surface>
   );
 }

@@ -1,22 +1,37 @@
-import { ArrowLeftRight, Home, LayoutGrid, Package, User } from 'lucide-react';
+import { ArrowLeftRight, Home, Layers, LayoutGrid, Package, User } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
+import { useAuth } from '../auth/AuthContext';
+import { canAccess } from '../auth/types';
 
 const tabs = [
   { to: '/', label: 'Accueil', icon: Home, end: true },
   { to: '/lots', label: 'Lots', icon: Package },
-  { to: '/matching', label: 'Regroup.', icon: ArrowLeftRight },
+  { to: '/matching', label: 'Match.', icon: ArrowLeftRight },
+  { to: '/grouping', label: 'Grouper', icon: Layers },
   { to: '/operations', label: 'Opér.', icon: LayoutGrid },
   { to: '/profil', label: 'Profil', icon: User },
 ] as const;
 
+function useVisibleTabs() {
+  const { session } = useAuth();
+  if (!session) return [];
+  return tabs.filter((tab) => canAccess(session.role, tab.to));
+}
+
 export function BottomNav() {
+  const visible = useVisibleTabs();
+  if (visible.length === 0) return null;
+
   return (
     <nav
       aria-label="Navigation principale"
       className="fixed inset-x-0 bottom-0 z-30 border-t border-black/5 bg-white pb-[env(safe-area-inset-bottom)] md:hidden"
     >
-      <ul className="grid grid-cols-5 px-1 pt-2 pb-2">
-        {tabs.map((tab) => {
+      <ul
+        className="grid px-1 pt-2 pb-2"
+        style={{ gridTemplateColumns: `repeat(${visible.length}, minmax(0, 1fr))` }}
+      >
+        {visible.map((tab) => {
           const Icon = tab.icon;
           return (
             <li key={tab.to}>
@@ -41,14 +56,25 @@ export function BottomNav() {
 }
 
 export function SideNav() {
+  const { session } = useAuth();
+  const visible = useVisibleTabs();
+
   return (
     <aside className="hidden w-56 shrink-0 border-r border-black/5 bg-white md:flex md:flex-col">
       <div className="px-5 py-6">
         <p className="text-sm font-bold tracking-wide text-af-green">AGROFLOW</p>
         <p className="mt-1 text-xs text-af-muted">Lots, flux, passeport</p>
+        {session ? (
+          <p className="mt-3 text-[11px] font-bold text-af-ink">
+            {session.displayName}
+            <span className="mt-0.5 block font-normal text-af-muted capitalize">
+              {session.role.replace('_', ' ')}
+            </span>
+          </p>
+        ) : null}
       </div>
       <nav className="flex flex-1 flex-col gap-1 px-3" aria-label="Principal">
-        {tabs.map((tab) => {
+        {visible.map((tab) => {
           const Icon = tab.icon;
           return (
             <NavLink

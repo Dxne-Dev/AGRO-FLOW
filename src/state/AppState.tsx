@@ -1,22 +1,47 @@
 import { useEffect, useMemo, useReducer, type ReactNode } from 'react';
-import { loadState, resetState, saveState } from '../services/storage';
+import { useAuth } from '../auth/AuthContext';
+import {
+  clearWorkspace,
+  loadDemoSeed,
+  loadState,
+  saveState,
+} from '../services/storage';
 import { reduce } from './reducer';
 import { AppStateContext, type Store } from './useAppState';
 
 export function AppStateProvider({ children }: { children: ReactNode }) {
-  const [state, dispatch] = useReducer(reduce, undefined, () => loadState());
+  const { session } = useAuth();
+  const userId = session?.userId ?? null;
+  const [state, dispatch] = useReducer(reduce, undefined, () =>
+    loadState(userId),
+  );
 
   useEffect(() => {
-    saveState(state);
-  }, [state]);
+    dispatch({ type: 'reset', state: loadState(userId) });
+  }, [userId]);
+
+  useEffect(() => {
+    saveState(userId, state);
+  }, [state, userId]);
 
   const value = useMemo<Store>(
     () => ({
       state,
       dispatch,
-      resetDemo: () => dispatch({ type: 'reset', state: resetState() }),
+      loadDemo: () => {
+        if (!userId) return;
+        dispatch({ type: 'reset', state: loadDemoSeed(userId) });
+      },
+      clearWorkspace: () => {
+        if (!userId) return;
+        dispatch({ type: 'reset', state: clearWorkspace(userId) });
+      },
+      resetDemo: () => {
+        if (!userId) return;
+        dispatch({ type: 'reset', state: loadDemoSeed(userId) });
+      },
     }),
-    [state],
+    [state, userId],
   );
 
   return <AppStateContext.Provider value={value}>{children}</AppStateContext.Provider>;

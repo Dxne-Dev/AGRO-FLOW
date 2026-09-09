@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { EmptyState } from '../components/EmptyState';
 import { QRPassport } from '../components/QRPassport';
+import { buildSeed } from '../services/seed';
 import { useAppState } from '../state/useAppState';
 import { formatDate, formatDateTime } from '../utils/formatDate';
 import { formatKg } from '../utils/formatKg';
@@ -9,12 +10,22 @@ import { formatKg } from '../utils/formatKg';
 export function PassportPage() {
   const { lotId } = useParams();
   const { state } = useAppState();
-  const lot = state.lots.find((item) => item.id === lotId);
-  const operations = state.operations.filter((op) => lot && op.lotIds.includes(lot.id));
+  const demo = useMemo(() => buildSeed(new Date()), []);
+  const lot =
+    state.lots.find((item) => item.id === lotId) ??
+    demo.lots.find((item) => item.id === lotId);
+  const operations = state.operations.filter(
+    (op) => lot && op.lotIds.includes(lot.id),
+  );
   const events = state.evenements.filter(
     (event) =>
-      event.lotId === lotId || operations.some((op) => op.evenementIds.includes(event.id)),
+      event.lotId === lotId ||
+      operations.some((op) => op.evenementIds.includes(event.id)),
   );
+  const history =
+    events.length > 0
+      ? events
+      : demo.evenements.filter((event) => event.lotId === lotId);
   const url = useMemo(() => {
     if (!lotId) return '';
     return `${window.location.origin}/passport/${lotId}`;
@@ -24,9 +35,9 @@ export function PassportPage() {
     return (
       <EmptyState
         title="Passeport introuvable"
-        body="Ce lot n’existe pas dans l’état courant."
-        to="/lots"
-        cta="Retour aux lots"
+        body="Ce lot n’existe pas. Chargez le scénario démo depuis le profil, ou créez un lot."
+        to="/login"
+        cta="Choisir un rôle"
       />
     );
   }
@@ -47,21 +58,29 @@ export function PassportPage() {
         </dl>
         <section>
           <h2 className="text-lg font-semibold">Historique</h2>
-          {events.length === 0 ? (
+          {history.length === 0 ? (
             <p className="mt-2 text-sm text-stone-500">Pas encore d’événement tracé.</p>
           ) : (
             <ol className="mt-3 space-y-2">
-              {events.map((event) => (
-                <li key={event.id} className="rounded-md border border-stone-200 bg-white p-3 text-sm">
+              {history.map((event) => (
+                <li
+                  key={event.id}
+                  className="rounded-md border border-stone-200 bg-white p-3 text-sm"
+                >
                   <p className="font-medium">{event.message}</p>
-                  <p className="text-xs text-stone-500">{formatDateTime(event.date)}</p>
+                  <p className="text-xs text-stone-500">
+                    {formatDateTime(event.date)}
+                  </p>
                 </li>
               ))}
             </ol>
           )}
         </section>
         {operations[0] ? (
-          <Link className="text-sm text-emerald-700 hover:underline" to={`/operations/${operations[0].id}`}>
+          <Link
+            className="text-sm text-emerald-700 hover:underline"
+            to={`/operations/${operations[0].id}`}
+          >
             Voir l’opération {operations[0].id}
           </Link>
         ) : null}

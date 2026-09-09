@@ -1,0 +1,30 @@
+[
+  {
+    "id": "user-producteur-demo",
+    "email": "producteur@agroflow.demo",
+    "password": "Producteur2026!",
+    "role": "producteur",
+    "displayName": "Coop. Zagnanado"
+  },
+  {
+    "id": "user-transporteur-demo",
+    "email": "transporteur@agroflow.demo",
+    "password": "Transport2026!",
+    "role": "transporteur",
+    "displayName": "Transport Atlantique"
+  },
+  {
+    "id": "user-acheteur-demo",
+    "email": "acheteur@agroflow.demo",
+    "password": "Acheteur2026!",
+    "role": "acheteur",
+    "displayName": "Marché Dantokpa"
+  },
+  {
+    "id": "user-operateur-demo",
+    "email": "operateur@agroflow.demo",
+    "password": "Operateur2026!",
+    "role": "operateur",
+    "displayName": "Ops AgroFlow"
+  }
+]

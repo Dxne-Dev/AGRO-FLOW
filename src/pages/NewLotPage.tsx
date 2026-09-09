@@ -14,7 +14,7 @@ import {
 } from '../types/lot';
 import { addDaysIso, formatDateRange, todayIso } from '../utils/formatDate';
 import { formatKg } from '../utils/formatKg';
-import { SESSION_PRODUCER } from '../session';
+import { useAuth } from '../auth/AuthContext';
 import { FieldLabel, PrimaryButton, SelectControl } from './new-lot/fields';
 
 const PRODUCTS = Object.keys(PRODUCT_CATEGORY).map(
@@ -30,7 +30,9 @@ const WIZARD_CONSTRAINTS: { id: Contrainte | 'aucune'; label: string }[] = [
 
 export function NewLotPage() {
   const { state, dispatch } = useAppState();
+  const { session } = useAuth();
   const navigate = useNavigate();
+  const producerName = session?.displayName ?? 'Coop. Zagnanado';
   const [step, setStep] = useState<1 | 2 | 3>(1);
   const [produit, setProduit] = useState('Maïs');
   const [quantiteKg, setQuantiteKg] = useState('500');
@@ -97,7 +99,7 @@ export function NewLotPage() {
         produit: produit.trim(),
         categorie: resolvedCategory,
         quantiteKg: qty,
-        producteur: SESSION_PRODUCER,
+        producteur: producerName,
         localisation,
         destination,
         dateDisponibilite: dateFrom,

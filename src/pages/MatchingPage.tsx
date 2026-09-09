@@ -4,7 +4,7 @@ import { AppHeader } from '../components/AppHeader';
 import { EmptyState } from '../components/EmptyState';
 import { Eyebrow, Surface } from '../components/Surface';
 import { proposalsForReference } from '../services/grouping';
-import { SESSION_PRODUCER } from '../session';
+import { useAuth } from '../auth/AuthContext';
 import { useAppState } from '../state/useAppState';
 import { formatDisponibilite } from '../utils/formatDate';
 import { formatKg } from '../utils/formatKg';
@@ -12,18 +12,22 @@ import { ProposalCard } from './matching/ProposalCard';
 
 export function MatchingPage() {
   const { state } = useAppState();
+  const { session } = useAuth();
   const [params] = useSearchParams();
   const navigate = useNavigate();
   const disponibles = state.lots.filter((lot) => lot.statut === 'disponible');
+  const producerName = session?.displayName;
 
   const reference = useMemo(() => {
     const requested = params.get('ref');
     return (
       disponibles.find((lot) => lot.id === requested) ??
-      disponibles.find((lot) => lot.producteur === SESSION_PRODUCER) ??
+      (producerName
+        ? disponibles.find((lot) => lot.producteur === producerName)
+        : undefined) ??
       disponibles[0]
     );
-  }, [disponibles, params]);
+  }, [disponibles, params, producerName]);
 
   const proposals = useMemo(
     () => (reference ? proposalsForReference(state.lots, reference.id) : []),

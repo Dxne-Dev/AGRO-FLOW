@@ -32,7 +32,7 @@ export function AppHeader({
             className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm text-af-ink hover:bg-af-canvas"
           >
             <RotateCcw className="h-4 w-4" aria-hidden />
-            Réinitialiser la démo
+            Charger les données de démonstration
           </button>
         </div>
       </details>

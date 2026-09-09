@@ -5,6 +5,11 @@ import type { Action } from './reducer';
 export type Store = {
   state: AppState;
   dispatch: (action: Action) => void;
+  /** Injecte le scénario AF-001… dans le workspace du compte. */
+  loadDemo: () => void;
+  /** Vide lots / opérations / événements. */
+  clearWorkspace: () => void;
+  /** Alias de loadDemo (compat profil). */
   resetDemo: () => void;
 };
 
