@@ -1,0 +1,43 @@
+---
+description: Règles clés AgroFlow MVP — stack, périmètre, données, priorités
+alwaysApply: true
+---
+
+# AgroFlow — règles MVP
+
+Source de vérité : `AgroFlow_SPEC.md`. Ne pas inventer hors spec.
+
+## Stack (figée)
+- React + Vite + Tailwind uniquement — **pas de backend**, pas de lib UI externe
+- Libs autorisées : `react-router-dom`, `lucide-react`, `qrcode.react`, `recharts`
+- Persistance : seed JSON → mutations LocalStorage clé `agroflow_state_v1`
+
+## Hors périmètre
+Auth réelle, multi-users, API distante, optim d'itinéraires, push temps réel, certification réglementaire.
+
+## Priorités (couper du bas)
+1. Création lot + matching + regroupement
+2. Opération + timeline + dashboard
+3. QR / carte flux / animations — **jamais** au détriment du niveau 1
+
+## Données & code
+- Types **uniquement** dans `src/types/lot.ts` — importer, ne jamais redéfinir
+- Services purs (pas de JSX) : `compatibility.ts`, `rulesEngine.ts`, `storage.ts`
+- IDs lots : `AF-XXX` ; capacité véhicule standard : **1000 kg**
+- Localisations seed : Bohicon, Allada, Abomey-Calavi, Porto-Novo, Parakou
+- Destinations : Cotonou, Abomey-Calavi, Porto-Novo
+- Scénario démo §10 (AF-001/002/003 maïs → Cotonou) : **ne pas modifier** après H2
+
+## Compatibilité & alertes
+- Pondération et seuils (§5.2–5.3) figés : ≥75 haute, 50–74 moyenne, <50 non proposé
+- Règles R1–R4 (§6) figées ; alertes = aide affichée, ne bloquent pas la nav
+
+## Conventions
+- TypeScript strict, pas de `any` sans justification
+- Un composant PascalCase par fichier ; structure `components/ pages/ data/ services/ utils/ types/`
+- Diffs ciblés ; pas de réécriture large ; pas de placeholders "test"/"lorem"
+
+## Design
+- Source visuelle : `DESIGN.md` (Tuple) — Iris `#6a5ed9` = seule CTA ; cobalt/coral/sprout = accents décoratifs
+- Fonts : Inter (UI) + DM Mono (eyebrows / labels) ; canvas zinc-50, cards blanc, bordures zinc-200
+- Pas d'écran vide sans empty state + CTA ; pas de `undefined` affiché

@@ -1,0 +1,23 @@
+[
+  {
+    "id": "EVT-001",
+    "lotId": "AF-011",
+    "type": "changement_statut",
+    "message": "Lot chargé et départ confirmé vers Cotonou",
+    "date": "2026-09-08T08:30:00.000Z"
+  },
+  {
+    "id": "EVT-002",
+    "lotId": "AF-011",
+    "type": "note",
+    "message": "Contrôle température ambiante OK au départ",
+    "date": "2026-09-08T09:00:00.000Z"
+  },
+  {
+    "id": "EVT-003",
+    "lotId": "AF-001",
+    "type": "note",
+    "message": "Lot déclaré disponible par Coop. Zagnanado",
+    "date": "2026-09-09T07:15:00.000Z"
+  }
+]

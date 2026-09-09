@@ -1,0 +1,175 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'DM Mono', ui-monospace, monospace;
+
+  --color-iris: #6a5ed9;
+  --color-cobalt: #3f71d4;
+  --color-coral: #db5434;
+  --color-sprout: #1bb152;
+  --color-emerald: #16a34a;
+  --color-mint: #22c55e;
+  --color-lime: #4ade80;
+  --color-crimson: #ef4444;
+  --color-saffron: #ffb929;
+  --color-mint-wash: #dcfce7;
+  --color-saffron-wash: #fdc75c;
+
+  --shadow-subtle:
+    rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.1) 0px 1px 2px -1px;
+  --shadow-bordered:
+    rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+  --shadow-elevated: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+  --shadow-nav:
+    rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
+    rgba(0, 0, 0, 0.1) 0px 8px 10px -6px;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-feature-settings: 'cv05', 'cv06', 'ss01';
+  background-color: #fafafa;
+  color: #27272a;
+  font-size: 16px;
+  line-height: 1.63;
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-mono {
+  font-feature-settings: 'ss03', 'ss04', 'ss05';
+}
+
+.af-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 1.33;
+}
+
+.af-card {
+  background: #ffffff;
+  border: 1px solid #e4e4e7;
+  border-radius: 12px;
+  box-shadow: var(--shadow-subtle);
+}
+
+.af-card-quiet {
+  background: #ffffff;
+  border: 1px solid #e4e4e7;
+  border-radius: 12px;
+}
+
+.af-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 12px;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.25;
+  transition:
+    background-color 160ms ease,
+    color 160ms ease,
+    border-color 160ms ease,
+    transform 120ms ease;
+}
+
+.af-btn:active {
+  transform: translateY(1px);
+}
+
+.af-btn:focus-visible {
+  outline: 2px solid #6a5ed9;
+  outline-offset: 2px;
+}
+
+.af-btn-primary {
+  background: #6a5ed9;
+  color: #ffffff;
+}
+
+.af-btn-primary:hover {
+  background: #5b50c4;
+}
+
+.af-btn-primary:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.af-btn-outlined {
+  background: #ffffff;
+  color: #27272a;
+  border: 1px solid #e4e4e7;
+}
+
+.af-btn-outlined:hover {
+  background: #f4f4f5;
+}
+
+.af-btn-ghost {
+  background: transparent;
+  color: #27272a;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.af-btn-ghost:hover {
+  background: #f4f4f5;
+}
+
+@keyframes af-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.af-enter {
+  animation: af-fade-up 480ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.af-enter-delay-1 {
+  animation-delay: 50ms;
+}
+.af-enter-delay-2 {
+  animation-delay: 100ms;
+}
+.af-enter-delay-3 {
+  animation-delay: 150ms;
+}
+.af-enter-delay-4 {
+  animation-delay: 200ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .af-enter,
+  .af-enter-delay-1,
+  .af-enter-delay-2,
+  .af-enter-delay-3,
+  .af-enter-delay-4 {
+    animation: none;
+  }
+
+  .af-btn:active {
+    transform: none;
+  }
+}

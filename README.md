@@ -1,45 +1,24 @@
-# AGRO-FLOW
+# AgroFlow
 
-AGRO-FLOW est un projet de gestion agricole orienté vers l’optimisation des opérations de terrain, la surveillance des cultures et la prise de décision basée sur les données.
+Mutualiser les volumes. Organiser les flux. Suivre les lots.
 
-## Objectif du projet
-
-Le but principal est de centraliser les informations liées :
-
-- aux parcelles et cultures,
-- à l’irrigation et aux besoins en eau,
-- au suivi des interventions agronomiques,
-- à la productivité et aux performances globales.
-
-## Vision
-
-AGRO-FLOW vise à fournir un socle technique pour une meilleure traçabilité, une meilleure planification et une meilleure analyse des activités agricoles.
-
-## Structure du dépôt
-
-Le dépôt contient actuellement une base de documentation et plusieurs documents de référence du projet.
-
-- `README.md` : présentation du projet et mise en route,
-- `AgroFlow_Document_collaboratif_Hackathon_2026.docx` : document collaboratif du hackathon,
-- `AgroFlow_Planning_36h_et_Prompts_Cursor.pdf` : planification du projet et prompts d’assistance,
-- `AgroFlow_UX.docx` : éléments UX et vision produit,
-- `src/` : code source du projet,
-- `docs/` : documentation technique et fonctionnelle.
+MVP hackathon Cursor × Devs Days 2026 — React + Vite + Tailwind, données locales (JSON + LocalStorage).
 
 ## Démarrage
 
-1. Cloner le dépôt.
-2. Ouvrir le projet dans votre environnement de développement.
-3. Installer les dépendances nécessaires selon la stack technique retenue.
-4. Démarrer l’application ou le service associé.
+```bash
+npm install
+npm run dev
+```
 
-## Prochaines étapes
+Build : `npm run build`
 
-- définir l’architecture technique,
-- mettre en place les modules de gestion des cultures,
-- ajouter les fonctionnalités de suivi terrain,
-- intégrer les outils d’analyse et de reporting.
+## Stack
 
-## État actuel
+- React 19 + Vite + TypeScript (strict)
+- Tailwind CSS 4
+- `react-router-dom`, `lucide-react`, `qrcode.react`, `recharts`
 
-Ce README constitue le premier jalon du projet et marque le démarrage du dépôt AGRO-FLOW.
+## Spec
+
+Voir `AgroFlow_SPEC.md` et `.cursor/rules/agroflow-mvp.mdc`.
